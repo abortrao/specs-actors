@@ -652,6 +652,7 @@ type PreCommitSectorParams = miner0.SectorPreCommitInfo
 // Proposals must be posted on chain via sma.PublishStorageDeals before PreCommitSector.
 // Optimization: PreCommitSector could contain a list of deals that are not published yet.
 func (a Actor) PreCommitSector(rt Runtime, params *PreCommitSectorParams) *abi.EmptyValue {
+	rt.Log(rtt.INFO, "xjgw: actor PreCommitSector sectorNumber %v ", params.SectorNumber)
 	nv := rt.NetworkVersion()
 	if !CanPreCommitSealProof(params.SealProof, nv) {
 		rt.Abortf(exitcode.ErrIllegalArgument, "unsupported seal proof type %v at network version %v", params.SealProof, nv)
@@ -810,7 +811,9 @@ type ProveCommitSectorParams = miner0.ProveCommitSectorParams
 // Checks state of the corresponding sector pre-commitment, then schedules the proof to be verified in bulk
 // by the power actor.
 // If valid, the power actor will call ConfirmSectorProofsValid at the end of the same epoch as this message.
-func (a Actor) ProveCommitSector(rt Runtime, params *ProveCommitSectorParams) *abi.EmptyValue {
+func
+(a Actor) ProveCommitSector(rt Runtime, params *ProveCommitSectorParams) *abi.EmptyValue {
+	rt.Log(rtt.INFO, "xjgw: actor proveCommitSector sectorNumber %v ", params.SectorNumber)
 	rt.ValidateImmediateCallerAcceptAny()
 
 	if params.SectorNumber > abi.MaxSectorNumber {

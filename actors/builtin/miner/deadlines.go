@@ -2,7 +2,6 @@ package miner
 
 import (
 	"errors"
-
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/dline"
 	"golang.org/x/xerrors"
@@ -64,8 +63,8 @@ func deadlineIsMutable(provingPeriodStart abi.ChainEpoch, dlIdx uint64, currentE
 	// mutations to the deadline).
 	dlInfo := NewDeadlineInfo(provingPeriodStart, dlIdx, currentEpoch).NextNotElapsed()
 	// Ensure that the current epoch is at least one challenge window before
-	// that deadline opens.
-	return currentEpoch < dlInfo.Open-WPoStChallengeWindow
+	// that deadline opens.// todo xjgw
+	return currentEpoch < dlInfo.Open-2*WPoStChallengeWindow
 }
 
 // Returns true if optimistically accepted posts submitted to the given deadline
